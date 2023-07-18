@@ -2,7 +2,8 @@ import React, {Component} from 'react';
 import {BrowserRouter, Route, Link} from "react-router-dom"
 import {Outlet} from "react-router-dom"
 import Navigation from "../components/navigation/navigation"
-import "./layout.css"
+
+import { LayoutContainer } from './layout.styles';
 
 class Layout extends Component {
   constructor(props) {
@@ -11,10 +12,10 @@ class Layout extends Component {
 
   render() {
 	return(
-      <div className="Layout">
-        <Navigation signOut={this.props.signOut} className="side-bar"/>
+      <LayoutContainer>
+        <Navigation signOut={this.props.signOut} />
         <Outlet />
-      </div>
+      </LayoutContainer>
 	);
   }
 }

@@ -1,87 +1,83 @@
-import React, {Component} from 'react';
-import {BrowserRouter, Route, Link} from "react-router-dom"
-import Drag_drop from '../components/Table/Drag_drop'
-import Table from '../components/Table/Table'
+import React, { useEffect, useState, useContext} from 'react';
+import {BrowserRouter, Route, Link, useLocation} from "react-router-dom"
+import {UserContext} from '../contexts/user.context'
 
-class DonorInfo extends Component {
-	constructor(props) {
-		super(props);
-		this.state = {
-			donations:[0],
-			donorInfo:[],
-			donationSum:0
-		}
-	}
+const DonorInfo = () => {
+	const { currentUser } = useContext(UserContext)
+	let {state} = useLocation()
 
-	componentDidMount() {
-		fetch('http://localhost:3000/donorinfo', {
-      	method: 'post',
-      	headers: {'Content-Type': 'application/json'},
-      	body: JSON.stringify({
-        donorcode: this.props.donorcode,
-        email: this.props.user.email
-      })
-    })
-      .then(response => response.json())
-      .then(object => this.setState({
-      	donations:object.donations, 
-  			donorInfo:object.donorInfo[0],
-  			donationSum:object.donationSum	
-  			}))
-}
+	const [donorInfo, setdonorInfo] = useState({
+		'contactinfo': {
+			'email' : '',
+			'address': '',
+			'postalcode': ''
+		},
+		'tasks': [],
+		'history': [],
+		'donations': []
+	})
 
-	handleDonorClick() {
-		//fetch the donor info db.donors and db.donations
-		//update the state
-	}
+	useEffect(()=> {
+			fetch('http://localhost:3000/donorinfo', {
+			method: 'post',
+			headers: {'Content-Type': 'application/json'},
+			body: JSON.stringify({
+				donorcode: state.donorcode,
+				name: state.name,
+				email: currentUser.email
+		})
+		})
+		.then(response => response.json())
+		.then(object => setdonorInfo(object))
+	},[])
 
-
-	render () {
 	return(
       <div>
         <div className="Main">
-          	<div id="Controls">
-          		<p></p>
-							<p className="This"> Ministry Partner Information</p>
-							<p></p>
-						</div>
+			<div id="Controls">
+				<p></p>
+		  		<p className="This"> Ministry Partner Information</p>
+		  		<p></p>
+	  		</div>
 			<div>
-				<h2>{this.state.donorInfo.name}</h2>
-				<p>Donor ID:{this.state.donorInfo.donorcode}</p>
+				<h2>{donorInfo.contactinfo.name}</h2>
+				<p>Donor ID:{donorInfo.contactinfo.donorcode}</p>
 				<h2>Address</h2>
-				<p>{this.state.donorInfo.address}</p>
-				<p>{this.state.donorInfo.city},{this.state.donorInfo.state} {this.state.donorInfo.postalcode}</p>
+				<p>{donorInfo.contactinfo.address}</p>
+				<p>{donorInfo.contactinfo.city},{donorInfo.contactinfo.state} {donorInfo.contactinfo.postalcode}</p>
 				<h2>Email</h2>
-				<p>{this.state.donorInfo.email}</p>
+				<p>{donorInfo.contactinfo.email}</p>
 			</div>
-		<div className="Table">
-	      <table>
-	        <tbody>
-	          <tr className="tableHead">
-	            <td>Date</td>
-	            <td>Type</td>
-	            <td>Memo</td>
-	            <td>Amount</td>
-	          </tr>
-	          {this.state.donations.map(x=>(
-	          	<tr className="row">
-		            <td >{x.giftdate}</td>
-		            <td>{x.paymentmethodcode}</td>
-		            <td>{x.memo}</td>
-		            <td>{x.amount}</td>
-            	</tr>
-	          	))}
-	          <tr className="tableHead">
-	          	<th colSpan="3">Total ({this.state.donations.length} Donations):{this.state.donationSum}</th>
-	          </tr>
-	        </tbody>
-	      </table>
-		</div>
-				
+			<div className="Table">
+				<table>
+					<tbody>
+						<tr className="tableHead">
+							<td>Date</td>
+							<td>Type</td>
+							<td>Memo</td>
+							<td>Amount</td>
+						</tr>
+						{donorInfo.donations.map(x=>(
+						<tr className="row">
+							<td >{x.giftdate}</td>
+							<td>{x.paymentmethodcode}</td>
+							<td>{x.memo}</td>
+							<td>{x.amount}</td>
+						</tr>
+						))}
+					<tr className="tableHead">
+					<th colSpan="3">Total ({donorInfo.donations.length} Donations):{}</th>
+					</tr>
+					</tbody>
+				</table>
+			</div>	
         </div>
       </div>
 	);
-}
+
 }
 
 export default DonorInfo;
+
+
+

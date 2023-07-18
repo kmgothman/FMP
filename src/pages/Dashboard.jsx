@@ -3,10 +3,13 @@ import {BrowserRouter, Route, Link} from "react-router-dom"
 import Drag_drop from '../components/Table/Drag_drop'
 import Table from '../components/Table/Table'
 import {UserContext} from '../contexts/user.context'
+import styled, { ThemeProvider} from 'styled-components'
+import {ThemeContext} from '../contexts/theme.context'
 
 const Dashboard = () => {
 
 	const { currentUser } = useContext(UserContext)
+	const { currentTheme } = useContext(ThemeContext)
 
 	const [dashboardData, setDashboardData] = useState({
 		donationMonths: [],
@@ -16,7 +19,14 @@ const Dashboard = () => {
 		averageDonation: null
 	})
 
+	const theme = {
+		main: "black",
+		second: "green"
+		};
+
 	useEffect(() => {
+		console.log(currentTheme)
+		console.log(theme)
 		fetch('https://fmp-api.onrender.com/dashboard', {
     	method: 'post',
     	headers: {'Content-Type': 'application/json'},
@@ -33,9 +43,15 @@ const Dashboard = () => {
 	}, [])
 
 
+
+
+
 	return(
-      
+		
         <div className="Main">
+			<div>
+			
+			</div>
         	<div id="Controls">
 		        <p className="Prev">User: {currentUser.email}</p>
 		        <p> </p>
@@ -80,6 +96,7 @@ const Dashboard = () => {
 						</div>
 					</div>
         </div>
+		
       
 	);
 }

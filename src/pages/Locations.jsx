@@ -2,6 +2,15 @@ import React, {Component, useState, useContext, useEffect } from 'react';
 import {BrowserRouter, Route, Link} from "react-router-dom"
 import {CanvasJSChart} from 'canvasjs-react-charts';
 import { UserContext } from '../contexts/user.context';
+import Header from '../components/header/header'
+import Loading from '../icons/loading.gif'
+
+import {
+	MainContainer,
+	LocationsContainer,
+	LocationsControlsContainer,
+	TableContainer
+} from './Locations.styles'
 
 
 const Locations = () => {
@@ -9,9 +18,11 @@ const Locations = () => {
 
 	const [stateNames, setStateNames] = useState([])
 	const [statesObject, setStatesObject] = useState([])
+	const [loading, setLoading] = useState(false)
 
 	useEffect(() => {
-		fetch('https://fmp-api.onrender.com/locations', {
+		setLoading(true)
+		fetch('http://localhost:3000/locations', {
 		method: 'post',
 		headers: {'Content-Type': 'application/json'},
 		body: JSON.stringify({
@@ -23,6 +34,7 @@ const Locations = () => {
 			console.log(object)
 			setStatesObject(object)
 			setStateNames(Object.keys(object))
+			setLoading(false)
 		})
 	}, [])
 
@@ -64,10 +76,21 @@ const Locations = () => {
 		}
 		return (
 			<div>
-				<CanvasJSChart options = {options} 
-					/* onRef={ref => this.chart = ref} */
-					/* containerProps={{ width: '100%', height: '300px' }} */
-				/>
+				<MainContainer>
+					<Header/>
+					<LocationsContainer>
+						<LocationsControlsContainer>
+						</LocationsControlsContainer>
+						<TableContainer>
+							{loading ? (<img src={Loading} alt='loading...' width='70px' height='70px'/>):(<div><CanvasJSChart options = {options} 
+							/* onRef={ref => this.chart = ref} */
+							/* containerProps={{ width: '100%', height: '300px' }} */
+							/></div>)}
+							
+						</TableContainer>
+					</LocationsContainer>
+				</MainContainer>
+				
 				{/*You can get reference to the chart instance as shown above using onRef. This allows you to access all chart properties and methods*/}
 	 
 			</div>

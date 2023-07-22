@@ -1,17 +1,19 @@
-import React from 'react';
+import React, {useState} from 'react';
 import ReactDOM from 'react-dom/client';
-import './index.css';
+import './index.css'
 import App from './App';
 import reportWebVitals from './reportWebVitals';
-import { UserContext, UserProvider } from './contexts/user.context';
+import { UserProvider } from './contexts/user.context';
+import { ThemeContext, CurrentThemeProvider } from './contexts/theme.context'
+
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
-  <div>
     <UserProvider >
+    <CurrentThemeProvider>
       <App />
+    </CurrentThemeProvider>
     </UserProvider>
-  </div>
 );
 
 // If you want to start measuring performance in your app, pass a function

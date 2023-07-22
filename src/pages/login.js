@@ -22,7 +22,7 @@ class Login extends React.Component {
   }
 
   onSubmitSignIn = () => {
-  	console.log('logging you in')
+  	
   	
     fetch('http://localhost:3000/signin', {
       method: 'post',

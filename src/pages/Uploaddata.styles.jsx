@@ -10,10 +10,25 @@ export const MainContainer = styled.div`
 `
 
 export const InstructionsContainer = styled.div`
-    background-color: ${props => props.theme.second};
+    background-color: ${props => props.theme.fifth};
     margin: 0px;
     padding: 16px;
-
+    p{
+        color: ${props => props.theme.second};
+    }
+    a{
+        text-decoration: none;
+        color: ${props => props.theme.eighth};
+        background: ${props => props.theme.main};
+        padding: 4px;
+        border-radius: 15px;
+        box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.2);
+        &:hover {
+            color: ${props => props.theme.fourth};
+            cursor: pointer;
+            background: ${props => props.theme.second};
+          }
+    }
 `
 export const ContentContainer = styled.div`
     background-color: ${props => props.theme.fifth};
@@ -27,41 +42,30 @@ export const ContentControlsContainer = styled.div`
     display: flex;
     height: 68px;
     justify-content: flex-start;
-    align-items: center;
-    font-Weight: bold; 
-    p {
-        color: ${props => props.theme.third};
+    align-items: flex-end;
+    font-Weight: bold;
+    margin-left: 20px;
+    margin-right: 20px;
+    border-bottom: 1px ${props => props.theme.seventh} solid;
+    button {
+        border: none;
+        background: none;
+        font-weight: bold;
+        font-size: 1rem;
+        padding: 10px;
+        color: ${props => props.theme.second};
+        &:hover {
+            color: ${props => props.theme.fourth};
+            cursor: pointer;
+          }
+
     }
     div {
         margin-left: 25px
     }
     
 `
-export const FilterContainer = styled.div`
-    margin-left: 25px;
-    button {
-        margin: 6px;
-        border: none;
-        padding: 7px;
-        border-radius: 20px;
-        background-color: ${props => props.theme.sixth};
-        &:hover {
-            background-color: ${props => props.theme.fifth};
-        }
 
-    }
-    `
-
-export const SearchContainer = styled.div`
-    background-color: ${props => props.theme.sixth};
-    padding: 5px;
-    border-radius : 20px;
-    display: flex;
-    input {
-        border: none;
-        background-color: ${props => props.theme.sixth};
-    }
-`
 
 export const UploadContainer = styled.div`
     background-color: ${props => props.theme.sixth};
@@ -74,36 +78,6 @@ export const UploadContainer = styled.div`
         align-items: center
     }
     
-    table {
-        padding-top: 5px;
-       width: 100%;
-       border: 1px solid;
-       border-color: ${props => props.theme.seventh};
-        border-collapse: collapse;
-
-    }
-    tr {
-        height : 30px;
-        border: 1px solid
-        border-style: solid
-        border-color: black;
-        &:hover {
-            background-color: ${props => props.theme.fourth};
-        }
-    }
-    td {
-        border: 1px solid;
-        border-color: ${props => props.theme.seventh};
-        text-align: left;
-        padding-left: 20px
-    }
-    a {
-        text-decoration: none;
-        color: #0B57D0;
-    }
-    img {
-        margin-top: 200px
-    }
     
 `
 

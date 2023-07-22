@@ -1,10 +1,24 @@
 import React, { useEffect, useState, useContext} from 'react';
 import {BrowserRouter, Route, Link, useLocation} from "react-router-dom"
 import {UserContext} from '../contexts/user.context'
+import { ThemeContext } from '../contexts/theme.context'
+import {
+	MainContainer,
+	ContentContainer,
+	ContentControlsContainer,
+	TableContainer,
+	TitleContainer,
+	ContactInfoDiv
+} from './DonorInfo.styles';
+import Header from '../components/header/header'
+import Loading from '../icons/loading.gif'
 
 const DonorInfo = () => {
 	const { currentUser } = useContext(UserContext)
+	const { currentTheme } = useContext(ThemeContext)
+	const [ currentPage, setCurrentPage] = useState('contactinfo')
 	let {state} = useLocation()
+	const [ loading , setLoading ] = useState(false)
 
 	const [donorInfo, setdonorInfo] = useState({
 		'contactinfo': {
@@ -18,7 +32,8 @@ const DonorInfo = () => {
 	})
 
 	useEffect(()=> {
-			fetch('http://localhost:3000/donorinfo', {
+		setLoading(true)
+			fetch('https://fmp-api.onrender.com/donorinfo', {
 			method: 'post',
 			headers: {'Content-Type': 'application/json'},
 			body: JSON.stringify({
@@ -28,51 +43,145 @@ const DonorInfo = () => {
 		})
 		})
 		.then(response => response.json())
-		.then(object => setdonorInfo(object))
+		.then(object => {
+			
+			setdonorInfo(object)
+			setLoading(false)
+		})
 	},[])
 
-	return(
-      <div>
-        <div className="Main">
-			<div id="Controls">
-				<p></p>
-		  		<p className="This"> Ministry Partner Information</p>
-		  		<p></p>
-	  		</div>
-			<div>
-				<h2>{donorInfo.contactinfo.name}</h2>
-				<p>Donor ID:{donorInfo.contactinfo.donorcode}</p>
-				<h2>Address</h2>
-				<p>{donorInfo.contactinfo.address}</p>
-				<p>{donorInfo.contactinfo.city},{donorInfo.contactinfo.state} {donorInfo.contactinfo.postalcode}</p>
-				<h2>Email</h2>
-				<p>{donorInfo.contactinfo.email}</p>
-			</div>
-			<div className="Table">
-				<table>
-					<tbody>
-						<tr className="tableHead">
-							<td>Date</td>
-							<td>Type</td>
-							<td>Memo</td>
-							<td>Amount</td>
+	const pageClick = (page) => {
+		setCurrentPage(page)
+	}
+
+	const handleCompletePush = (task) => {
+		fetch('https://fmp-api.onrender.com/taskcompletetoggle', {
+		method: 'post',
+		headers: {'Content-Type': 'application/json'},
+		body: JSON.stringify({
+			email: currentUser.email,
+            task: task
+		})
+		})
+        .then(()=>window.location.reload(false))
+	}
+
+	const renderSwitch = ( page )=> {
+		switch(page) {
+			case 'contactinfo':
+				return(
+					<ContactInfoDiv>
+						<div>
+							<b>Address</b>
+							<p>{donorInfo.contactinfo.address}</p>
+							<p>{donorInfo.contactinfo.city}, {donorInfo.contactinfo.state}</p>
+							<p>{donorInfo.contactinfo.postalcode}</p>
+						</div>
+						<div>
+							<b>Phone</b>
+							<p>{donorInfo.contactinfo.phone}</p>
+							<b>Email</b>
+							<p>{donorInfo.contactinfo.email}</p>
+						</div>
+						<div>
+							<b>Donor Code</b>
+							<p>{donorInfo.contactinfo.donorcode}</p>
+						</div>
+					</ContactInfoDiv>
+				);
+			case 'donations':
+				return(
+					<table>
+						<tr >
+							<th>Gift Amount</th>
+							<th>Date</th>
+							<th>Donor Code</th>
+							<th>Memo</th>
 						</tr>
-						{donorInfo.donations.map(x=>(
-						<tr className="row">
-							<td >{x.giftdate}</td>
-							<td>{x.paymentmethodcode}</td>
-							<td>{x.memo}</td>
+						{donorInfo.donations.map(x => (
+						<tr key={x.code}>
 							<td>{x.amount}</td>
+							<td>{x.giftdate}</td>
+							<td>{x.donorcode}</td>
+							<td>{x.memo}</td>
 						</tr>
 						))}
-					<tr className="tableHead">
-					<th colSpan="3">Total ({donorInfo.donations.length} Donations):{}</th>
-					</tr>
-					</tbody>
-				</table>
-			</div>	
-        </div>
-      </div>
+						<tr>
+							<th >Total ({donorInfo.donations.length} Donations): </th>
+						</tr>
+					</table>
+				);
+			case 'tasks':
+				return(
+					<table>
+						<tr className="tableHead">
+							<td></td>
+							<td>Name</td>
+							<td>Date</td>
+							<td>Type</td>
+							<td>Discription</td>
+							<td>Donor Code</td>
+						</tr>
+						{donorInfo.tasks.map((task) => { 
+							return(
+							<tr key={task.taskid}>
+								<td><button onClick={()=>handleCompletePush(task)}>Complete</button></td>
+								<td >{task.name}</td>
+								<td>{task.date}</td>
+								<td>{task.type}</td>
+								<td>{task.description}</td>
+								<td >{task.donorcode}</td>
+							</tr>)
+						})}
+					</table>
+				);
+			case 'history':
+				return(
+					<table>
+						<tr className="tableHead">
+							<td></td>
+							<td>Name</td>
+							<td>Date</td>
+							<td>Type</td>
+							<td>Discription</td>
+							<td>Donor Code</td>
+						</tr>
+						{donorInfo.history.map((task) => { 
+							return(
+							<tr key={task.taskid}>
+								<td><button onClick={()=>handleCompletePush(task)}>Incomplete</button></td>
+								<td >{task.name}</td>
+								<td>{task.date}</td>
+								<td>{task.type}</td>
+								<td>{task.description}</td>
+								<td >{task.donorcode}</td>
+							</tr>)
+						})}
+					</table>
+				);
+		}
+	  }
+
+	return(
+		<MainContainer>
+		<Header/>
+		<ContentContainer>
+			<ContentControlsContainer>
+					<div>
+						<button style={currentPage === 'contactinfo' ? ({color: currentTheme.eighth, 'border-bottom': 'solid 2px' }) : ({background: 'none'})} onClick={()=>pageClick('contactinfo')}>Contact Info</button>
+						<button style={currentPage === 'donations' ? ({color: currentTheme.eighth, 'border-bottom': 'solid 2px' }) : ({background: 'none'})} onClick={()=>pageClick('donations')}>Donations</button>
+						<button style={currentPage === 'tasks' ? ({color: currentTheme.eighth, 'border-bottom': 'solid 2px' }) : ({background: 'none'})} onClick={()=>pageClick('tasks')}>Tasks</button>
+						<button style={currentPage === 'history' ? ({color: currentTheme.eighth, 'border-bottom': 'solid 2px' }) : ({background: 'none'})} onClick={()=>pageClick('history')}>History</button>
+					</div>
+			</ContentControlsContainer>
+		<TitleContainer>
+			<h1>{donorInfo.contactinfo.name}</h1><h1>Donor Since: May 2023</h1>
+		</TitleContainer>
+		<TableContainer>
+			{loading ? (<img src={Loading} alt='loading...' width='70px' height='70px'/>) : ( renderSwitch(currentPage))}
+		</TableContainer>
+		</ContentContainer>
+		</MainContainer>
 	);
 
 }

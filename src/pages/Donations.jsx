@@ -28,7 +28,7 @@ const Donations = () => {
 
 	useEffect(() => {
 		setLoading(true)
-		fetch('http://localhost:3000/donations', {
+		fetch('https://fmp-api.onrender.com/donations', {
 		method: 'post',
 		headers: {'Content-Type': 'application/json'},
 		body: JSON.stringify({
@@ -38,7 +38,7 @@ const Donations = () => {
 		.then((response) => response.json()
 		)
 		.then((object) => {
-			console.log(object)
+			
 			setDonations(object.donations)
 			setMonthIndex(object.monthNames.length-1)
 			setMonthNames(object.monthNames)

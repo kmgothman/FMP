@@ -1,7 +1,8 @@
-import React, {useState} from 'react';
+import React, {useState, useContext} from 'react';
 import {BrowserRouter, Route, Link} from "react-router-dom"
 import Drag_drop from '../components/Table/Drag_drop'
 import ContactsDragDrop from '../components/Table/ContactsDragDrop';
+import {ThemeContext} from '../contexts/theme.context'
 import {
 	MainContainer,
 	ContentContainer,
@@ -11,18 +12,22 @@ import {
 } from './Uploaddata.styles'
 
 import Header from '../components/header/header'
+import ExcelTemplate from '../downloads/FMP-Contacts-Template.xlsx'
 
 const UploadData = () => {
-
-	const [pageToggle, setPageToggle] = useState('contacts') //gifts or contacts
+	const {currentTheme} = useContext(ThemeContext)
+	const [pageToggle, setPageToggle] = useState('donations') //gifts or contacts
 
 	const giftsClick = () => {
-		setPageToggle('gifts')
+		setPageToggle('donations')
 	}
 
 	const contactsClick = () => {
 		setPageToggle('contacts')
 	}
+
+	const donationInstructions = "To upload your donations log into TNT and download the CSV file for each month. Then individually upload each CSV onto this page."
+	const contactsInstructions = "To upload contacts, download the Excel sheet template and fill in you contact information. Then save as a CSV and upload it here."
 
 	return(
 		<MainContainer>
@@ -30,15 +35,24 @@ const UploadData = () => {
 			<ContentContainer>
 				<ContentControlsContainer>
 					<div>
-						<button onClick={giftsClick}>gifts</button><button onClick={contactsClick}>contacts</button>
+						<button style={pageToggle === 'contacts' ? ({background:'none'}) : ({color: currentTheme.eighth, 'border-bottom': 'solid 2px' })} onClick={giftsClick}>Donations</button>
+						<button style={pageToggle === 'contacts' ? ({color: currentTheme.eighth, 'border-bottom': 'solid 2px' }) : ({background: 'none'})} onClick={contactsClick}>Contacts</button>
 					</div>
 				</ContentControlsContainer>
 				<UploadContainer>
 					<InstructionsContainer>
-						<p>here are a bunch of instruction about how to use this feature. they will be different for each upload option.</p>
+						{pageToggle === 'contacts' ? (
+							<div>
+								<a href={ExcelTemplate} download>Click to download</a>
+								<p>{contactsInstructions}</p>
+							</div>
+						):(
+							<p>{donationInstructions}</p>
+						)}
+						
 					</InstructionsContainer>
 					<div>
-					{pageToggle === 'contacts' ? <ContactsDragDrop/> : <Drag_drop/>}
+						{pageToggle === 'contacts' ? <ContactsDragDrop/> : <Drag_drop/>}
 					</div>
 				</UploadContainer>
 			</ContentContainer>

@@ -4,7 +4,8 @@ export const DragDropField = styled.div`
     display: flex;
     flex-direction: column;
     align-items: center;
-    border: black;
+    width: 100%;
+    height: 100%;
 
     
 `
@@ -78,20 +79,59 @@ export const ContactInfo = styled.div`
     display: flex;
     flex-direction: column;
     width: 50%;
+    height: 100%;
 `
 
 export const ButtonsContainer = styled.div`
     width: 50%;
+    display: flex;
+    flex-direction: column;
+    div {
+        display: flex;
+    }
+    input {
+        background : ${props => props.theme.seventh};
+        border: none;
+        padding: 3px;
+        padding-left: 10px;
+        border-radius: 10px;
+    }
+    button {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-color: ${props => props.theme.eighth};
+        margin: 3px;
+        border-radius: 10px;
+        border: none;
+        color: ${props => props.theme.fifth};
+        &:hover {
+            background-color: ${props => props.theme.second};
+            cursor: pointer;
+          }
+    }
 `
 
 export const ExistingContactsContainer = styled.div`
     display: flex;
     flex-direction: column;
-    overflow-y: auto;
-    height: calc(100% - 100px);
     max-height: 200px;
     width: 50%;
     border-left: 1px solid ${props => props.theme.second};
+
+    overflow-y: scroll;
+    button {
+        border: none;
+        border-radius: 10px;
+        background: none;
+        color: ${props => props.theme.third};
+        &:hover {
+            background-color: ${props => props.theme.seventh};
+            cursor: pointer;
+
+
+        }
+    }
 `
 
 export const HeadContainer = styled.div`
@@ -111,4 +151,5 @@ export const BodyContainer = styled.div`
     background-color: ${props => props.theme.fifth};
     border-bottom-left-radius: 12px;
     border-bottom-right-radius: 12px;
+
 `

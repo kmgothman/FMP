@@ -3,6 +3,13 @@ import {BrowserRouter, Route, Link} from "react-router-dom"
 import Logo from '../components/navigation/Logo/Logo.png'
 import { useContext } from 'react';
 import { UserContext, setCurrentUser, } from '../contexts/user.context';
+import { ThemeContext } from '../contexts/theme.context'
+import {
+	ButtonsContainer,
+	ContentContainer,
+	HomePageContainer,
+	ImageContainer
+} from './homepage.styles'
 
 import { auth, provider, createUserDocumentFromAuth, myVariable, signOutUser } from '../utils/firebase/firebase.utils'
 import { getAuth, getRedirectResult, signInWithRedirect, signInWithPopup, GoogleAuthProvider } from "firebase/auth";
@@ -30,25 +37,26 @@ const Homepage = () => {
 
 
 	return(
-			<div style={{backgroundImage: 'url("/background.jpg")',
-                     backgroundRepeat: "no-repeat",
-                     backgroundSize: "cover"}} className="landing">
-        <div className="box-home">
-					<div className="box-top"> 
-						<img width="100" alt="Logo" src={Logo}/>
-					</div>
-					<div className="box-bottom">
-						<h2>A Webapp for Managing Donations</h2>
-						<button onClick={logGoogleUser} className='register'>Log In </button>
-						<button onClick={logOutUser} className='register'>sign out </button>
-						
-						<a>create new account</a>
-			
-					</div>
-				</div>
-		</div>
+			<HomePageContainer >
+        		<ContentContainer>
+
+					<h1>Maximize Your Fundraising Efforts</h1>
+					<h3>FMP is a web app design to increase productivity and improve your Mission Partner Development. Manage contacts and analyze data to help you on your fundraising journey.</h3>
+					<ButtonsContainer>
+					<button onClick={logGoogleUser}>Get Started </button>
+					<button style={{background: '#3793de', color: 'white'}}>Try Demo </button>
+					</ButtonsContainer>
+				</ContentContainer>
+				<ImageContainer>
+				<img width="250" alt="Logo" src={Logo}/>
+				</ImageContainer>
+		</HomePageContainer>
 	);
 
 }
 
 export default Homepage;
+
+// style={{backgroundImage: 'url("/background.jpg")',
+// 			backgroundRepeat: "no-repeat",
+// 			backgroundSize: "cover"}}

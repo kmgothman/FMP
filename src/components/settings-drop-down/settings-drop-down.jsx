@@ -19,6 +19,8 @@ const SettingsDropDown = () => {
                 sixth: "#F2F6FC",
                 seventh: "#c9c9c9",
                 eighth: "#0B57D0",
+                ninth: "#C2E7FF",
+                tenth: "#3793de"
             })
         } else {
             setCurrentTheme({
@@ -30,7 +32,9 @@ const SettingsDropDown = () => {
                 fifth: "#1d2229",
                 sixth: "#5e6b7a",
                 seventh: "#525252",
-                eighth: "#5580b5"
+                eighth: "#5580b5",
+                ninth: "#335d87",
+                tenth: "#28497d"
             })
         }
     }

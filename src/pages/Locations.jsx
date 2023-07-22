@@ -22,7 +22,7 @@ const Locations = () => {
 
 	useEffect(() => {
 		setLoading(true)
-		fetch('http://localhost:3000/locations', {
+		fetch('https://fmp-api.onrender.com/locations', {
 		method: 'post',
 		headers: {'Content-Type': 'application/json'},
 		body: JSON.stringify({
@@ -31,7 +31,7 @@ const Locations = () => {
 		})
 		.then((response) => response.json())
 		.then((object) => {
-			console.log(object)
+			
 			setStatesObject(object)
 			setStateNames(Object.keys(object))
 			setLoading(false)

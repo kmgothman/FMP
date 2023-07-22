@@ -60,7 +60,7 @@ const logOutUser = () => {
 				<LinkContainer className={nav == '/Uploaddata' ? 'selected':'unselected'}><UploadIcon width='20' height='20' fill={currentTheme.third} stroke={currentTheme.third}/><StyledLink to="/Uploaddata">Upload Data</StyledLink></LinkContainer>
 				<LinkContainer className={nav == '/Tasks' ? 'selected':'unselected'}><TasksIcon width='20' height='20' fill={currentTheme.third} stroke={currentTheme.third}/><StyledLink to="/Tasks">Tasks</StyledLink></LinkContainer>
 				<LinkContainer className={nav == '/History' ? 'selected':'unselected'}><HistoryIcon width='20' height='20' fill={currentTheme.third} stroke={currentTheme.third}/><StyledLink to="/History">History</StyledLink></LinkContainer>
-				<LinkContainer ><SignOutIcon width='20' height='20' fill={currentTheme.third} stroke={currentTheme.third}/><StyledLink  onClick={logOutUser} to="/">Sign Out</StyledLink></LinkContainer>
+				
 			</SideBarContainer>
 		</NavigationContainer>
 	);} else {
@@ -77,7 +77,7 @@ const logOutUser = () => {
 				<LinkContainer className={nav == '/Uploaddata' ? 'selected':'unselected'}><UploadIcon width='20' height='20' fill={currentTheme.third} stroke={currentTheme.third}/><StyledLink to="/Uploaddata">Upload Data</StyledLink></LinkContainer>
 				<LinkContainer className={nav == '/Tasks' ? 'selected':'unselected'}><TasksIcon width='20' height='20' fill={currentTheme.third} stroke={currentTheme.third}/><StyledLink to="/Tasks">Tasks</StyledLink></LinkContainer>
 				<LinkContainer className={nav == '/History' ? 'selected':'unselected'}><HistoryIcon width='20' height='20' fill={currentTheme.third} stroke={currentTheme.third}/><StyledLink to="/History">History</StyledLink></LinkContainer>
-				<LinkContainer><SignOutIcon width='20' height='20' fill={currentTheme.third} stroke={currentTheme.third}/><StyledLink onClick={logOutUser} to="/">Sign Out</StyledLink></LinkContainer>
+				
 			</SideBarContainer>
 		</NavigationContainer>)
 	}

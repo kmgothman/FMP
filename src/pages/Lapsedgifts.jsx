@@ -24,7 +24,7 @@ const Lapsedgift = () => {
 
 	useEffect(() => {
 		setLoading(true)
-		fetch('http://localhost:3000/lapsedgift', {
+		fetch('https://fmp-api.onrender.com/lapsedgift', {
 		method: 'post',
 		headers: {'Content-Type': 'application/json'},
 		body: JSON.stringify({
@@ -33,7 +33,7 @@ const Lapsedgift = () => {
 		})
 		.then((response) => response.json())
 		.then((object) => {
-			console.log(object)
+			
 			setLapsedGifts(object.lapsedDonors)
 			setMissingGiftMonths(object.missingGifts)
 			setLoading(false)
@@ -45,7 +45,7 @@ const Lapsedgift = () => {
 			<Header/>
 			<ContactsContainer>
 				<ContactsControlsContainer>
-					<b>Lapsed Gifts</b>
+					<h1>Lapsed Gifts</h1>
 				</ContactsControlsContainer>
 			<TableContainer>
 			<div><img src={Loading} alt='loading...' width='70px' height='70px'/></div>
@@ -61,7 +61,7 @@ const Lapsedgift = () => {
 			<Header/>
 			<ContactsContainer>
 				<ContactsControlsContainer>
-					<b>Lapsed Gifts</b>
+					<h1>Lapsed Gifts</h1>
 				</ContactsControlsContainer>
 			<TableContainer>
 			<div><h1>upload data for {missingGiftMonths[0]} to use this report.</h1></div>
@@ -77,7 +77,7 @@ const Lapsedgift = () => {
 				<Header/>
 				<ContactsContainer>
 					<ContactsControlsContainer>
-					<b>Lapsed Gifts</b>
+					<h1>Lapsed Gifts</h1>
 					</ContactsControlsContainer>
 					<TableContainer>
 						<table>
@@ -109,7 +109,7 @@ const Lapsedgift = () => {
 			<Header/>
 			<ContactsContainer>
 				<ContactsControlsContainer>
-					<b>Lapsed Gifts</b>
+					<h1>Lapsed Gifts</h1>
 				</ContactsControlsContainer>
 			<TableContainer>
 			 <h1>Upload Data!</h1>

@@ -31,7 +31,7 @@ const Contacts = () => {
 
 	useEffect(() => {
 		setLoading(true)
-		fetch('http://localhost:3000/contacts', {
+		fetch('https://fmp-api.onrender.com/contacts', {
 		method: 'post',
 		headers: {'Content-Type': 'application/json'},
 		body: JSON.stringify({
@@ -43,10 +43,8 @@ const Contacts = () => {
 			setContacts(object)
 			setContactNames(Object.keys(object))
 			setFilteredContactNames(Object.keys(object))
-			contactNames.map((name)=>{console.log(name)
-			console.log(contacts[name].city)
+			
 			setLoading(false)
-			})
 		})
 	}, [])
 

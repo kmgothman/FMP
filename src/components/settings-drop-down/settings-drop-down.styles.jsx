@@ -13,7 +13,7 @@ export const SettingsContainer = styled.div`
     background-color: ${props => props.theme.fifth};
     top: 50px;
     right: 60px;
-    x-index: 10;
+    z-index: 10;
 
     p {
         font-size: 1.5rem;

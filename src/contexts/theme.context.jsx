@@ -10,7 +10,9 @@ export const ThemeContext = createContext({
     fifth: "white",
     sixth: "#F2F6FC",
     seventh: "#c9c9c9",
-    eighth: "#0B57D0"
+    eighth: "#0B57D0",
+    ninth: "#C2E7FF",
+    tenth: "#3793de"
 })
 
 export const CurrentThemeProvider = ({ children }) => {
@@ -24,6 +26,8 @@ export const CurrentThemeProvider = ({ children }) => {
         sixth: "#F2F6FC",
         seventh: "#c9c9c9",
         eighth: "#0B57D0",
+        ninth: "#C2E7FF",
+        tenth: "#3793de"
     })
     const value = { currentTheme, setCurrentTheme}
     

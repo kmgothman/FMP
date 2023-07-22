@@ -6,7 +6,6 @@ function Layout2() {
 	return(
       <div className="App">
       	<Homepage/>
-        <Outlet />
       </div>
 	);
 }

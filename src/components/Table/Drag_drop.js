@@ -12,12 +12,12 @@ import {
   ContactInfo,
   ExistingContactsContainer,
   ButtonsContainer,
-  LeftContainer,
-  RightContainer,
   HeadContainer,
   BodyContainer
 } from './Drag-drop.styles';
 import { ReactComponent as Upload} from '../../icons/uploadimage.svg'
+import { ReactComponent as Plus} from '../../icons/plus.svg'
+import { ReactComponent as Previous} from '../../icons/left.svg'
 
 const Drag_drop = () => {
   const [file, setFile] = useState();
@@ -42,10 +42,8 @@ const Drag_drop = () => {
   const handleSubmit = (event) => {
     if (file) {
       event.preventDefault();
-      console.log(
-        `Selected file - ${file}`
-      );
-      fetch('http://localhost:3000/file', {
+      
+      fetch('https://fmp-api.onrender.com/file', {
         method: 'post',
         headers: {'Content-Type': 'text/plain',
                   'email': currentUser.email},
@@ -90,16 +88,6 @@ const Drag_drop = () => {
 		}
 	}
 
-	const handleNextClick=() => {
-		let current = newDonorIndex
-		let max = newDonorNames.length
-		if (current === max) {
-
-		} else {
-			let newIndex = current+1
-			setNewDonorIndex(newIndex)
-		}
-	}
 
   const newDonorClick=()=>{
     let object = donorConfirmation
@@ -109,7 +97,7 @@ const Drag_drop = () => {
     let current = newDonorIndex
 		let max = newDonorNames.length-1
 		if (current === max) {
-      fetch('http://localhost:3000/confirmNewDonors', {
+      fetch('https://fmp-api.onrender.com/confirmNewDonors', {
         method: 'post',
         headers: {'Content-Type': 'application/json'},
         body: JSON.stringify({
@@ -133,7 +121,7 @@ const Drag_drop = () => {
     let current = newDonorIndex
 		let max = newDonorNames.length-1
 		if (current === max) {
-      fetch('http://localhost:3000/confirmNewDonor', {
+      fetch('https://fmp-api.onrender.com/confirmNewDonor', {
         method: 'post',
         headers: {'Content-Type': 'application/json'},
         body: JSON.stringify({
@@ -158,7 +146,6 @@ const Drag_drop = () => {
 
   const handleEnter = (e) => {
     e.preventDefault()
-    console.log('enter!')
   }
   const handleLeave = (e) => {
     e.preventDefault()
@@ -210,8 +197,8 @@ const Drag_drop = () => {
         </NewContactHead>
         <ButtonsContainer>
           <div>
-            <button onClick={newDonorClick}>New Contact</button>
-            <button onClick={handlePrevClick}>prev</button>
+            <button style={{background: currentTheme.fifth, color: currentTheme.eighth}} onClick={handlePrevClick}><Previous width='20' height='20' stroke={currentTheme.eighth} fill={currentTheme.eighth}/>previous</button>
+            <button onClick={newDonorClick}><Plus width='20' height='20' stroke={currentTheme.fourth} fill={currentTheme.fourth}/>New Contact</button>
           </div>
           <input type="text" placeholder="search contacts" onChange={event => handleSearch(event.target.value)}/>
         </ButtonsContainer>
@@ -224,7 +211,7 @@ const Drag_drop = () => {
         </ContactInfo>
         <ExistingContactsContainer>
             {filteredDonorNames.map((x)=>(
-              <li key={x}><button onClick={()=>existingDonorClick(x)}>{x}</button></li>
+              <button key={x} onClick={()=>existingDonorClick(x)}>{x}</button>
             ))}
         </ExistingContactsContainer>
       </BodyContainer>

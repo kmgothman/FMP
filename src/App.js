@@ -20,7 +20,6 @@ import Uploaddata from "./pages/Uploaddata"
 import Tasks from "./pages/Tasks"
 import History from "./pages/History"
 import { UserContext } from "./contexts/user.context"
-import NewDonor from './pages/NewDonor';
 import { ThemeProvider } from 'styled-components';
 import { ThemeContext } from './contexts/theme.context';
 
@@ -47,7 +46,6 @@ import { ThemeContext } from './contexts/theme.context';
             <Route path="login" element={<Dashboard  />} />
             <Route path="register" element={<Dashboard  />} />
             <Route path="Tasks" element={<Tasks />} />
-            <Route path="NewDonor" element={<NewDonor />} />
           </Route>
       )
     )

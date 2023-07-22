@@ -18,6 +18,7 @@ export const UserDropContainer = styled.div`
         color:${props => props.theme.third};
         margin-right: 15px;
     }
+    z-index: 10;
     `
 
 export const UserDiv = styled.div`

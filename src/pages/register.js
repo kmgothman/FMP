@@ -26,7 +26,7 @@ class Register extends React.Component {
   }
 
   onSubmit = () => {
-  	console.log('logging you in')
+  	
   	
     fetch('http://localhost:3000/register', {
       method: 'post',

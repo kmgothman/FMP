@@ -61,7 +61,7 @@ const Donations = () => {
 	const handleNextClick=() => {
 		let current = monthIndex
 		let max = monthNames.length
-		if (current === max) {
+		if (current === max-1) {
 
 		} else {
 			let newIndex = current+1

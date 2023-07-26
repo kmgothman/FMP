@@ -44,7 +44,7 @@ const Homepage = () => {
 					<h3>FMP is a web app design to increase productivity and improve your Mission Partner Development. Manage contacts and analyze data to help you on your fundraising journey.</h3>
 					<ButtonsContainer>
 					<button onClick={logGoogleUser}>Get Started </button>
-					<button style={{background: '#3793de', color: 'white'}}>Try Demo </button>
+					<a href="https://fmp-demo.onrender.com" style={{background: '#3793de', color: 'white'}}>Try Demo </a>
 					</ButtonsContainer>
 				</ContentContainer>
 				<ImageContainer>

@@ -43,6 +43,21 @@ export const ButtonsContainer = styled.div`
             color: #3e90c7;
         } 
     }
+    a{
+        font-weight: bold;
+        text-decoration: none;
+        border: none;
+        padding: 15px;
+        color: #3793de;
+        background: white; 
+        margin: 10px;
+        border-radius: 10px;
+        &: hover {
+            background: #e8e8e8;
+            cursor: pointer;
+            color: #3e90c7;
+        } 
+    }
 `
 const changeGradient = keyframes`
     from {

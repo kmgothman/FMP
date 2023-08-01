@@ -123,7 +123,6 @@ const Contacts = () => {
 		<div>
 		{contactNames.length ? (
 		<MainContainer>
-			<Header/>
 			<ContactsContainer>
 				<ContactsControlsContainer>
 					<div><FilterIcon onClick={filterClick} width='25' height='25' fill={currentTheme.third} stroke={currentTheme.third}/></div>
@@ -169,7 +168,6 @@ const Contacts = () => {
 		</MainContainer>
 		) : (
 			<MainContainer>
-			<Header/>
 			<ContactsContainer>
 				<ContactsControlsContainer>
 					<div><FilterIcon onClick={filterClick} width='25' height='25' fill={currentTheme.third} stroke={currentTheme.third}/></div>

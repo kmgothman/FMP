@@ -52,7 +52,6 @@ const History = () => {
 
 	return(
 		<MainContainer>
-		<Header/>
 		<ContentContainer>
 			<ContentControlsContainer>
 				<h1>History</h1>

@@ -2,7 +2,6 @@ import styled from 'styled-components'
 
 export const UserDropContainer = styled.div`
     position: absolute;
-    width: 400px;
     height: 250px;
     display: flex;
     flex-direction: column;
@@ -37,19 +36,15 @@ export const UserDiv = styled.div`
 
 export const ContactDiv = styled.div`
     height: 150px;
-    width: 380px;
     border-radius: 30px;
     margin: 10px;
+    padding: 15px;
     background-color: ${props => props.theme.fifth};
     display: flex;
+    flex-direction: column;
     justify-content:center;
-    align-items: center;
-    div {
-        display: flex;
-        flex-direction:column;
-        justify-content: center;
-        align-items: center;
-    }
+    align-items: stretch;
+    
     p{
         margin: 2px;
         color: ${props => props.theme.third};
@@ -72,4 +67,24 @@ export const SignOutDiv = styled.div`
         color: ${props => props.theme.third};
         text-decoration: none;
     }
+`
+export const XDiv = styled.div`
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    svg {
+        margin-right: 20px;
+    }
+`
+
+export const EmailDiv = styled.div`
+    display: flex;
+    flex-direction:column;
+    justify-content: center;
+    align-items: center;
+
+`
+export const UserInfoDiv = styled.div`
+    display: flex;
+    align-items: center;
 `

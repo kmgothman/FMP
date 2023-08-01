@@ -42,7 +42,6 @@ const Lapsedgift = () => {
 	if (loading) {
 		return(
 			<MainContainer>
-			<Header/>
 			<ContactsContainer>
 				<ContactsControlsContainer>
 					<h1>Lapsed Gifts</h1>
@@ -58,7 +57,6 @@ const Lapsedgift = () => {
 	} else if (missingGiftMonths.length > 0) {
 		return(
 			<MainContainer>
-			<Header/>
 			<ContactsContainer>
 				<ContactsControlsContainer>
 					<h1>Lapsed Gifts</h1>
@@ -74,7 +72,6 @@ const Lapsedgift = () => {
 	} else if (lapsedGifts.length > 0) {
 		return(
 			<MainContainer>
-				<Header/>
 				<ContactsContainer>
 					<ContactsControlsContainer>
 					<h1>Lapsed Gifts</h1>
@@ -106,7 +103,6 @@ const Lapsedgift = () => {
 	);} else {
 		return(
 			<MainContainer>
-			<Header/>
 			<ContactsContainer>
 				<ContactsControlsContainer>
 					<h1>Lapsed Gifts</h1>

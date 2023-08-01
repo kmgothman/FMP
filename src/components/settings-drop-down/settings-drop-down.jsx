@@ -1,11 +1,18 @@
 
-
-import { SettingsContainer } from './settings-drop-down.styles'
+import {useEffect} from 'react'
+import { 
+    SettingsContainer,
+    XDiv,
+    ButtonsDiv
+} from './settings-drop-down.styles'
 import {useState, useContext} from 'react'
 import { ThemeContext } from '../../contexts/theme.context'
+import { ReactComponent as XIcon} from '../../icons/close.svg'
 
-const SettingsDropDown = () => {
+const SettingsDropDown = (props) => {
     const { currentTheme, setCurrentTheme } = useContext(ThemeContext)
+
+
 
     const themeClick = () => {
         if (currentTheme.mode == 'dark') {
@@ -38,13 +45,19 @@ const SettingsDropDown = () => {
             })
         }
     }
+
     return(
         <SettingsContainer>
-            <p>Dark Theme</p>
-            <label class="switch">
-                <input type="checkbox"/>
-                <span onClick={themeClick} class="slider round"></span>
-            </label>
+            <XDiv>
+                <XIcon onClick={props.settingsToggle} width='30' height='30' fill={currentTheme.third}/>
+            </XDiv>
+            <ButtonsDiv>
+                <p>Dark Theme</p>
+                <label class="switch">
+                    <input type="checkbox"/>
+                    <span onClick={themeClick} class="slider round"></span>
+                </label>
+            </ButtonsDiv>
         </SettingsContainer>
     )
 }

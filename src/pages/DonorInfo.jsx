@@ -164,7 +164,6 @@ const DonorInfo = () => {
 
 	return(
 		<MainContainer>
-		<Header/>
 		<ContentContainer>
 			<ContentControlsContainer>
 					<div>

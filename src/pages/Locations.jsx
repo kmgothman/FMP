@@ -77,7 +77,6 @@ const Locations = () => {
 		return (
 			<div>
 				<MainContainer>
-					<Header/>
 					<LocationsContainer>
 						<LocationsControlsContainer>
 						</LocationsControlsContainer>

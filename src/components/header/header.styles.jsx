@@ -4,7 +4,7 @@ export const HeaderDiv = styled.div`
     height : 68px;
     background-color: ${props => props.theme.main};
     display: flex;
-    justify-content: flex-end;
+    justify-content: space-between;
     align-items: center;
     h1 {
         color: white;
@@ -37,24 +37,12 @@ export const SettingDiv = styled.div`
       }
 
 `
-
-
-    	// Define our button, but with the use of props.theme this time
-    export const Button = styled.button`
-        font-size: 1em;
-        margin: 1em;
-        padding: 0.25em 1em;
-        border-radius: 3px;
-    
-        /* Color the border and text with theme.main */
-        color: ${props => props.theme.main};
-        border: 2px solid ${props => props.theme.main};
-        `;
-    
-    // We are passing a default theme for Buttons that arent wrapped in the ThemeProvider
-        Button.defaultProps = {
-        theme: {
-        main: "yellow",
-        second: "blue"
-        }
-        }
+export const ButtonsDiv = styled.div`
+    display: flex;
+    align-items: center;
+`
+export const MenuDiv = styled.div`
+    display: flex;
+    align-items: center;
+    margin-left: 20px;
+`

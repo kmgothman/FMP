@@ -4,9 +4,7 @@ import Homepage from "./homepage"
 
 function Layout2() {
 	return(
-      <div className="App">
       	<Homepage/>
-      </div>
 	);
 }
 

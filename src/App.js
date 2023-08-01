@@ -22,12 +22,15 @@ import History from "./pages/History"
 import { UserContext } from "./contexts/user.context"
 import { ThemeProvider } from 'styled-components';
 import { ThemeContext } from './contexts/theme.context';
+import { MediaProvider } from './contexts/media.context';
+import { MediaContext } from './contexts/media.context';
 
 
 
   const App = () => {
     const { currentUser } = useContext(UserContext)
     const { currentTheme} = useContext(ThemeContext)
+    const { currentMedia } = useContext(MediaContext)
     const theme = {
       main: 'black'
     }
@@ -61,11 +64,15 @@ import { ThemeContext } from './contexts/theme.context';
 
     if ( currentUser) {
       return(
+        <MediaProvider media={currentMedia}>
         <ThemeProvider theme={currentTheme} >
         <RouterProvider router={routerLoggedIn} />
         </ThemeProvider>
+        </MediaProvider>
       )} else { return(
+        <MediaProvider media={currentMedia}>
       <RouterProvider router={routerLoggedOut} />
+      </MediaProvider>
 
       )}
 

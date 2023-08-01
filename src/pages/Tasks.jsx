@@ -91,7 +91,6 @@ const Tasks = () => {
 
 	return(
 		<MainContainer>
-		<Header/>
 		<ContentContainer>
 			<ContentControlsContainer>
 				<NewTaskDiv>

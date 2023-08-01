@@ -31,7 +31,6 @@ const UploadData = () => {
 
 	return(
 		<MainContainer>
-			<Header/>
 			<ContentContainer>
 				<ContentControlsContainer>
 					<div>

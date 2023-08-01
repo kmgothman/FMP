@@ -1,6 +1,7 @@
 import React,{ PureComponent, useContext, useState, useEffect} from 'react';
 import {UserContext} from '../contexts/user.context'
 import {ThemeContext} from '../contexts/theme.context'
+import { MediaContext } from '../contexts/media.context';
 import Header from '../components/header/header'
 import {
 	MainContainer,
@@ -19,6 +20,7 @@ const Dashboard = () => {
 
 	const { currentUser } = useContext(UserContext)
 	const { currentTheme } = useContext(ThemeContext)
+	const { currentMedia } = useContext(MediaContext)
 	const [ data, setData ] = useState([])
 	const [loading , setLoading ] = useState(false)
 
@@ -81,7 +83,6 @@ const Dashboard = () => {
 	return(
 		
         <MainContainer>
-			<Header/>
 			<ContentContainer>
         		<ContentHeadContainer>
 					<div>
@@ -124,7 +125,7 @@ const Dashboard = () => {
 							)}
 						</ChartContainer>
 					</DonationStatContainer>
-					<MPDStatContainer>
+					<MPDStatContainer style={currentMedia.isMobile ? {'flex-direction':'column'}:{'flex-direction':'row'}} >
 					<DataCard>
 						<h3>Donation Stats</h3>
 						<p>Total Donors </p>

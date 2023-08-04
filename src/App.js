@@ -12,8 +12,6 @@ import {
 } from "react-router-dom"
 import Layout from "./pages/layout"
 import Layout2 from "./pages/layout2"
-import Login from "./pages/login"
-import Register from "./pages/register"
 import Dashboard from "./pages/Dashboard"
 import Donations from "./pages/Donations"
 import Contacts from "./pages/Contacts"
@@ -67,8 +65,7 @@ import { selectCurrentUser } from './store/user/user.selecter'
     const routerLoggedOut = createBrowserRouter(
       createRoutesFromElements(
         <Route path="/" element={<Layout2 />} >
-            <Route path="login" element={<Login />} />
-            <Route path="register" element={<Register />} />
+            
         </Route>
       )
     )

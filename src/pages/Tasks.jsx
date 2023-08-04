@@ -1,9 +1,6 @@
-import React, {Component, useContext, useEffect, useState} from 'react';
-import {BrowserRouter, Route, Link} from "react-router-dom"
-import {UserContext} from '../contexts/user.context'
-import {ThemeContext} from '../contexts/theme.context'
+import React, {useEffect, useState} from 'react';
+import {Link} from "react-router-dom"
 import { confirmAlert } from "react-confirm-alert";
-
 
 import { 
 	MainContainer,
@@ -13,16 +10,17 @@ import {
 	NewTaskDiv
  } from './Tasks.styles';
 
- import Header from '../components/header/header'
  import NewTask from '../components/new-task/newTask';
 
 import {ReactComponent as Plus} from '../icons/plus.svg'
-import {ReactComponent as SearchIcon} from '../icons/search.svg'
 import Loading from '../icons/loading.gif'
+import {useSelector} from 'react-redux'
+import { selectCurrentTheme } from '../store/theme/theme.selector';
+import { selectCurrentUser } from '../store/user/user.selecter';
 
 const Tasks = () => {		
-	const { currentUser } = useContext(UserContext)
-	const { currentTheme } = useContext(ThemeContext)
+	const currentUser = useSelector(selectCurrentUser)
+	const currentTheme = useSelector(selectCurrentTheme)
 	const [tasks, setTasks] = useState([])
 	const [newTaskForm, setNewTaskForm] = useState(false)
 	const [loading, setLoading ] = useState(false)

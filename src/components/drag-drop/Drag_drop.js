@@ -1,9 +1,6 @@
-import React, { ChangeEvent, useState, useContext} from 'react';
-import { UserContext } from '../../contexts/user.context';
-import { ThemeContext } from '../../contexts/theme.context';
+import React, { useState} from 'react';
 import { confirmAlert } from "react-confirm-alert";
 import "react-confirm-alert/src/react-confirm-alert.css";
-import { useNavigate } from 'react-router-dom'
 import { 
   DragDropField,
   UploadForm,
@@ -18,6 +15,9 @@ import {
 import { ReactComponent as Upload} from '../../icons/uploadimage.svg'
 import { ReactComponent as Plus} from '../../icons/plus.svg'
 import { ReactComponent as Previous} from '../../icons/left.svg'
+import {useSelector} from 'react-redux'
+import { selectCurrentTheme } from '../../store/theme/theme.selector';
+import { selectCurrentUser } from '../../store/user/user.selecter';
 
 const Drag_drop = () => {
   const [file, setFile] = useState();
@@ -29,9 +29,9 @@ const Drag_drop = () => {
   const [existingDonorNames, setExistingDonorNames] = useState([])
   const [filteredDonorNames, setFilteredDonorNames] = useState([])
   const [donorConfirmation, setDonorConfirmation] = useState({})
-  const { currentUser } = useContext(UserContext)
-  const { currentTheme } = useContext(ThemeContext)
-  const navigate = useNavigate()
+	const currentUser = useSelector(selectCurrentUser)
+	const currentTheme = useSelector(selectCurrentTheme)
+  
 
   const handleFileChange = (e) => {
     if (e.target.files) {

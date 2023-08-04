@@ -1,8 +1,6 @@
-import React, {useState, useContext} from 'react';
-import {BrowserRouter, Route, Link} from "react-router-dom"
-import Drag_drop from '../components/Table/Drag_drop'
-import ContactsDragDrop from '../components/Table/ContactsDragDrop';
-import {ThemeContext} from '../contexts/theme.context'
+import React, {useState} from 'react';
+import Drag_drop from '../components/drag-drop/Drag_drop'
+import ContactsDragDrop from '../components/drag-drop/ContactsDragDrop';
 import {
 	MainContainer,
 	ContentContainer,
@@ -11,11 +9,12 @@ import {
 	InstructionsContainer
 } from './Uploaddata.styles'
 
-import Header from '../components/header/header'
 import ExcelTemplate from '../downloads/FMP-Contacts-Template.xlsx'
+import {useSelector} from 'react-redux'
+import { selectCurrentTheme } from '../store/theme/theme.selector';
 
 const UploadData = () => {
-	const {currentTheme} = useContext(ThemeContext)
+	const currentTheme = useSelector(selectCurrentTheme)
 	const [pageToggle, setPageToggle] = useState('donations') //gifts or contacts
 
 	const giftsClick = () => {

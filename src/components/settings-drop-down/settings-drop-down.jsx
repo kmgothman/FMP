@@ -5,18 +5,18 @@ import {
     XDiv,
     ButtonsDiv
 } from './settings-drop-down.styles'
-import {useState, useContext} from 'react'
-import { ThemeContext } from '../../contexts/theme.context'
 import { ReactComponent as XIcon} from '../../icons/close.svg'
+import {useSelector, useDispatch } from 'react-redux'
+import { selectCurrentTheme } from '../../store/theme/theme.selector'
+import { setCurrentTheme } from '../../store/theme/theme.reducer'
 
 const SettingsDropDown = (props) => {
-    const { currentTheme, setCurrentTheme } = useContext(ThemeContext)
-
-
+    const dispatch = useDispatch()
+    const currentTheme = useSelector(selectCurrentTheme)
 
     const themeClick = () => {
         if (currentTheme.mode == 'dark') {
-            setCurrentTheme({
+            dispatch(setCurrentTheme({
                 mode: "light",
                 main: "#f7f7f7",
                 second: "#adadad",
@@ -28,9 +28,9 @@ const SettingsDropDown = (props) => {
                 eighth: "#0B57D0",
                 ninth: "#C2E7FF",
                 tenth: "#3793de"
-            })
+            }))
         } else {
-            setCurrentTheme({
+            dispatch(setCurrentTheme({
                 mode: "dark",
                 main: "#232629",
                 second: "#425b7a",
@@ -42,7 +42,7 @@ const SettingsDropDown = (props) => {
                 eighth: "#5580b5",
                 ninth: "#335d87",
                 tenth: "#28497d"
-            })
+            }))
         }
     }
 

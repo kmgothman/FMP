@@ -1,22 +1,21 @@
-import React, { ChangeEvent, useState, useContext} from 'react';
-import { UserContext } from '../../contexts/user.context';
-import { ThemeContext } from '../../contexts/theme.context'
+import React, { useState} from 'react';
 import { confirmAlert } from "react-confirm-alert";
 import "react-confirm-alert/src/react-confirm-alert.css";
-import { useNavigate } from 'react-router-dom'
 import { 
   DragDropField,
   UploadForm
 } from './Drag-drop.styles';
 import { ReactComponent as Upload } from '../../icons/uploadimage.svg'
-
+import {useSelector} from 'react-redux'
+import { selectCurrentTheme } from '../../store/theme/theme.selector';
+import { selectCurrentUser } from '../../store/user/user.selecter';
 
 const ContactsDragDrop = () => {
   const [file, setFile] = useState();
-  const { currentUser } = useContext(UserContext)
   const [dragOver, setDragOver] = useState(false)
-  const { currentTheme } = useContext(ThemeContext)
-  
+	const currentUser = useSelector(selectCurrentUser)
+	const currentTheme = useSelector(selectCurrentTheme)  
+
   const handleFileChange = (e) => {
     if (e.target.files) {
       setFile(e.target.files[0]);

@@ -1,7 +1,5 @@
-import React, { useEffect, useState, useContext} from 'react';
-import {BrowserRouter, Route, Link, useLocation} from "react-router-dom"
-import {UserContext} from '../contexts/user.context'
-import { ThemeContext } from '../contexts/theme.context'
+import React, { useEffect, useState} from 'react';
+import {useLocation} from "react-router-dom"
 import {
 	MainContainer,
 	ContentContainer,
@@ -10,12 +8,14 @@ import {
 	TitleContainer,
 	ContactInfoDiv
 } from './DonorInfo.styles';
-import Header from '../components/header/header'
 import Loading from '../icons/loading.gif'
+import {useSelector} from 'react-redux'
+import { selectCurrentTheme } from '../store/theme/theme.selector';
+import { selectCurrentUser } from '../store/user/user.selecter';
 
 const DonorInfo = () => {
-	const { currentUser } = useContext(UserContext)
-	const { currentTheme } = useContext(ThemeContext)
+	const currentUser = useSelector(selectCurrentUser)
+	const currentTheme = useSelector(selectCurrentTheme)
 	const [ currentPage, setCurrentPage] = useState('contactinfo')
 	let {state} = useLocation()
 	const [ loading , setLoading ] = useState(false)

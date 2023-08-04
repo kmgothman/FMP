@@ -1,4 +1,8 @@
-import React, { useContext } from 'react';
+import React, {  useEffect } from 'react';
+import { onAuthStateChangedListener
+ } from './utils/firebase/firebase.utils';
+import { setCurrentUser } from './store/user/user.reducer'
+import { useDispatch, useSelector } from 'react-redux'
 import './App.css';
 import {  
   Route, 
@@ -19,21 +23,28 @@ import DonorInfo from "./pages/DonorInfo"
 import Uploaddata from "./pages/Uploaddata"
 import Tasks from "./pages/Tasks"
 import History from "./pages/History"
-import { UserContext } from "./contexts/user.context"
 import { ThemeProvider } from 'styled-components';
-import { ThemeContext } from './contexts/theme.context';
-import { MediaProvider } from './contexts/media.context';
-import { MediaContext } from './contexts/media.context';
+import { selectCurrentTheme } from './store/theme/theme.selector';
+import { selectCurrentUser } from './store/user/user.selecter'
 
 
-
+//df
   const App = () => {
-    const { currentUser } = useContext(UserContext)
-    const { currentTheme} = useContext(ThemeContext)
-    const { currentMedia } = useContext(MediaContext)
-    const theme = {
-      main: 'black'
-    }
+    const currentTheme = useSelector(selectCurrentTheme)
+    const currentUser = useSelector(selectCurrentUser)
+    const dispatch = useDispatch()
+ 
+
+    useEffect(()=>{
+      const unsubscribe = onAuthStateChangedListener((user)=>{
+          
+          dispatch(setCurrentUser(user))
+          if (user) {
+          //createUserDocumentFromAuth(user)
+          }
+      })
+      return unsubscribe
+  },[])
 
     const routerLoggedIn = createBrowserRouter(
       createRoutesFromElements(
@@ -64,15 +75,12 @@ import { MediaContext } from './contexts/media.context';
 
     if ( currentUser) {
       return(
-        <MediaProvider media={currentMedia}>
         <ThemeProvider theme={currentTheme} >
         <RouterProvider router={routerLoggedIn} />
         </ThemeProvider>
-        </MediaProvider>
-      )} else { return(
-        <MediaProvider media={currentMedia}>
+      )} else { 
+        return(
       <RouterProvider router={routerLoggedOut} />
-      </MediaProvider>
 
       )}
 

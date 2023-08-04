@@ -1,8 +1,5 @@
-import React, {Component, useState, useContext, useEffect } from 'react';
-import {BrowserRouter, Route, Link} from "react-router-dom"
+import React, { useState, useEffect } from 'react';
 import {CanvasJSChart} from 'canvasjs-react-charts';
-import { UserContext } from '../contexts/user.context';
-import Header from '../components/header/header'
 import Loading from '../icons/loading.gif'
 
 import {
@@ -11,10 +8,12 @@ import {
 	LocationsControlsContainer,
 	TableContainer
 } from './Locations.styles'
+import {useSelector} from 'react-redux'
+import { selectCurrentUser } from '../store/user/user.selecter';
 
 
 const Locations = () => {
-	const { currentUser } = useContext(UserContext)
+	const currentUser = useSelector(selectCurrentUser)
 
 	const [stateNames, setStateNames] = useState([])
 	const [statesObject, setStatesObject] = useState([])

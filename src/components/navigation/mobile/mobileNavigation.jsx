@@ -1,16 +1,12 @@
-import React, {useState, useContext} from 'react';
+import React, {useState} from 'react';
 import {
 	NavigationContainer, 
-	LogoContainer, 
 	SideBarContainer, 
 	DropBoxContainer,
 	StyledLink,
 	LinkContainer
 } from './mobileNavigation.styles'
-// import './navigation.css';
 import { useLocation} from "react-router-dom"
-import { ThemeContext } from '../../../contexts/theme.context';
-import { MediaContext} from '../../../contexts/media.context'
 import {ReactComponent as ContactIcon} from '../../../icons/contacts.svg'
 import {ReactComponent as DonationsIcon} from '../../../icons/donations.svg'
 import {ReactComponent as HistoryIcon} from '../../../icons/history.svg'
@@ -18,12 +14,14 @@ import {ReactComponent as TasksIcon} from '../../../icons/tasks.svg'
 import {ReactComponent as ReportsIcon} from '../../../icons/reports.svg'
 import {ReactComponent as UploadIcon} from '../../../icons/upload.svg'
 import {ReactComponent as DashboardIcon} from '../../../icons/dashboard.svg'
-import {ReactComponent as SignOutIcon} from '../../../icons/signout.svg'
 import {ReactComponent as DownIcon} from '../../../icons/down.svg'
 import {ReactComponent as LeftIcon} from '../../../icons/left.svg'
 import {ReactComponent as LocationIcon} from '../../../icons/location.svg'
 import {ReactComponent as LapsedIcon} from '../../../icons/lapsed.svg'
 import {ReactComponent as MenuIcon } from '../../../icons/menu.svg'
+
+import {useSelector} from 'react-redux'
+import { selectCurrentTheme } from '../../../store/theme/theme.selector';
 
 
 const MobileNavigation = (props) => {
@@ -31,8 +29,8 @@ const MobileNavigation = (props) => {
 const location = useLocation()
 const nav = location.pathname
 const [reportsToggle, setReportsToggle] = useState(0)
-const {currentTheme } = useContext(ThemeContext)
-const {currentMedia} = useContext(MediaContext)
+const currentTheme = useSelector(selectCurrentTheme)
+
 
 const reportsClick=() => {
 	if (reportsToggle) {
@@ -41,12 +39,6 @@ const reportsClick=() => {
 		setReportsToggle(1)
 	}
 }
-
-// const logOutUser = () => {
-// 	signOutUser()
-// }
-
-
 
 	if (reportsToggle) {
 	return(

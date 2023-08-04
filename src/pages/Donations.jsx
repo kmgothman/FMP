@@ -1,7 +1,5 @@
-import React, { useContext, useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link} from "react-router-dom"
-import {UserContext} from '../contexts/user.context'
-import { ThemeContext } from '../contexts/theme.context';
 import {
 	MainContainer,
 	DonationsContainer,
@@ -9,16 +7,17 @@ import {
 	TableContainer,
 	ControlDiv
 } from './donations.styles'
-import Header from '../components/header/header'
 import Loading from '../icons/loading.gif'
-import SettingsIcon from '../icons/settings.svg'
 import {ReactComponent as LeftIcon} from '../icons/left.svg'
 import {ReactComponent as RightIcon} from '../icons/right.svg'
+import {useSelector} from 'react-redux'
+import { selectCurrentTheme } from '../store/theme/theme.selector';
+import { selectCurrentUser } from '../store/user/user.selecter';
 
 
 const Donations = () => {		
-	const { currentUser } = useContext(UserContext)
-	const { currentTheme } = useContext(ThemeContext)
+	const currentUser = useSelector(selectCurrentUser)
+	const currentTheme = useSelector(selectCurrentTheme)
 
 	const [donations, setDonations] = useState([])
 	const [monthIndex, setMonthIndex] = useState(0)

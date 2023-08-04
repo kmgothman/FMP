@@ -1,0 +1,1 @@
+export const selectCurrentMedia = (state) => state.media.currentMedia

@@ -1,22 +1,19 @@
-import React, {Component, useContext, useEffect, useState} from 'react';
-import {BrowserRouter, Route, Link} from "react-router-dom"
-import Drag_drop from '../components/Table/Drag_drop'
-import { UserContext } from '../contexts/user.context';
+import React, {useEffect, useState} from 'react';
+import {Link} from "react-router-dom"
 import Loading from '../icons/loading.gif'
+import {useSelector} from 'react-redux'
+import { selectCurrentUser } from '../store/user/user.selecter';
 
 import {
 	MainContainer,
 	ContactsContainer,
 	ContactsControlsContainer,
 	TableContainer,
-	ControlDiv
 } from './Lapsedgifts.styles'
-
-import Header from '../components/header/header'
 
 
 const Lapsedgift = () => {
-	const { currentUser } = useContext(UserContext)
+	const currentUser = useSelector(selectCurrentUser)
 
 	const [lapsedGifts, setLapsedGifts] = useState([])
 	const [missingGiftMonths, setMissingGiftMonths] = useState([])

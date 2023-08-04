@@ -1,31 +1,30 @@
-import React, {Component, useContext, useState, useEffect} from 'react';
-import {BrowserRouter, Route, Link} from "react-router-dom"
+import React, {useState, useEffect} from 'react';
 import {Outlet} from "react-router-dom"
 import Navigation from "../components/navigation/navigation"
 import MobileNavigation from '../components/navigation/mobile/mobileNavigation';
-import { useMediaQuery } from 'react-responsive';
-import {ReactComponent as MenuIcon} from '../icons/menu.svg'
 
 import { 
   LayoutContainer,
   MobileLayoutContainer,
   MainContainer
  } from './layout.styles';
-import { MediaContext } from '../contexts/media.context';
-import { ThemeContext } from '../contexts/theme.context';
 import Header from '../components/header/header'
+import { useDispatch, useSelector } from 'react-redux';
+import { selectCurrentMedia } from '../store/media/media.selector';
+import { setCurrentMedia } from '../store/media/media.reducer'
 
 const Layout= () => {
+  const dispatch = useDispatch()
   const [menuToggle, setMenuToggle ] = useState(false)
-  const {currentTheme}= useContext(ThemeContext)
-  const {currentMedia, setCurrentMedia} = useContext(MediaContext)
+  const reduxCurrentMedia = useSelector(selectCurrentMedia)
+
 
   useEffect(()=>{
       const handleResize = () => {
        if (window.innerWidth<1000) {
-        setCurrentMedia({isMobile:true})
+        dispatch(setCurrentMedia({isMobile:true}))
       } else {
-        setCurrentMedia({isMobile:false})
+        dispatch(setCurrentMedia({isMobile:false}))
       }
       }
       
@@ -41,7 +40,7 @@ const Layout= () => {
     setMenuToggle(!menuToggle)
   }
 
-    if (currentMedia.isMobile) {
+    if (reduxCurrentMedia.isMobile) {
     return(
         <MobileLayoutContainer>
           

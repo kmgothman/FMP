@@ -1,7 +1,5 @@
-import React, { useContext, useEffect, useState} from 'react';
+import React, {  useEffect, useState} from 'react';
 import { Link} from "react-router-dom"
-import {UserContext} from '../contexts/user.context'
-import {ThemeContext} from '../contexts/theme.context'
 
 import { 
 	MainContainer,
@@ -12,16 +10,18 @@ import {
 	FilterContainer
  } from './contacts.styles';
 
-import Header from '../components/header/header'
-
 import {ReactComponent as FilterIcon} from '../icons/filter.svg'
 import {ReactComponent as SearchIcon} from '../icons/search.svg'
 import Loading from '../icons/loading.gif'
 
+import { selectCurrentTheme } from '../store/theme/theme.selector';
+import { selectCurrentUser } from '../store/user/user.selecter';
+import { useSelector } from 'react-redux'
+
 
 const Contacts = () => {		
-	const { currentUser } = useContext(UserContext)
-	const { currentTheme } = useContext(ThemeContext)
+	const currentUser = useSelector(selectCurrentUser)
+	const currentTheme = useSelector(selectCurrentTheme)
 
 	const [contacts, setContacts] = useState([])
 	const [filteredContactNames, setFilteredContactNames] = useState([])

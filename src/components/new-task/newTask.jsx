@@ -3,14 +3,14 @@ import {
     LabelDiv,
     InputDiv
 } from './newTask.styles'
-import {useState, useContext} from 'react'
-import { ThemeContext } from '../../contexts/theme.context'
-import { UserContext } from '../../contexts/user.context'
+import {useState} from 'react'
+import {useSelector} from 'react-redux'
+import { selectCurrentUser } from '../../store/user/user.selecter';
+
 
 
 const NewTask = (props) => {
-    const { currentTheme, setCurrentTheme } = useContext(ThemeContext)
-    const { currentUser, setCurrentUser} = useContext(UserContext)
+	const currentUser = useSelector(selectCurrentUser)
     const [ donorName, setDonorName ] = useState('')
     const [ type, setType ] = useState('')
     const [ description, setDescription ] = useState('')

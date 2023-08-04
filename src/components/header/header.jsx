@@ -5,14 +5,15 @@ import {
     ButtonsDiv,
     MenuDiv
 } from './header.styles'
-import {useState, useContext} from 'react'
+import {useState} from 'react'
 import {ReactComponent as SettingsIcon} from '../../icons/settings.svg'
 import {ReactComponent as MenuIcon} from '../../icons/menu.svg'
 import SettingsDropDown from '../settings-drop-down/settings-drop-down'
 import UserDropDown from '../user-drop-down/user-drop-down'
-import { ThemeContext } from '../../contexts/theme.context'
-import { UserContext } from '../../contexts/user.context'
-import { MediaContext } from '../../contexts/media.context'
+import { selectCurrentMedia } from '../../store/media/media.selector'
+import { selectCurrentTheme } from '../../store/theme/theme.selector'
+import { selectCurrentUser } from '../../store/user/user.selecter'
+import { useSelector } from 'react-redux'
 
 
 
@@ -20,9 +21,9 @@ const Header = (props) => {
 
     const [settingsToggle, setSettingsToggle] = useState(false)
     const [userToggle, setUserToggle] = useState(false)
-    const {currentTheme} = useContext(ThemeContext)
-    const {currentUser} = useContext(UserContext)
-    const {currentMedia} = useContext(MediaContext)
+    const currentTheme = useSelector(selectCurrentTheme)
+    const currentUser = useSelector(selectCurrentUser)
+    const currentMedia = useSelector(selectCurrentMedia)
 
     const settingsClick = () => {
         setSettingsToggle(!settingsToggle)

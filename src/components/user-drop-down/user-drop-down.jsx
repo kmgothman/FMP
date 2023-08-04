@@ -1,18 +1,18 @@
-import {useContext} from 'react'
 import { UserDropContainer, UserDiv, ContactDiv, SignOutDiv, XDiv, UserInfoDiv, EmailDiv} from './user-drop-down.styles'
 import {ReactComponent as SignOutIcon} from '../../icons/signout.svg'
 import {Link} from 'react-router-dom'
 
-import {UserContext} from '../../contexts/user.context'
-import { ThemeContext } from '../../contexts/theme.context'
-import { MediaContext } from '../../contexts/media.context'
 import {signOutUser} from '../../utils/firebase/firebase.utils'
 import {ReactComponent as XIcon} from '../../icons/close.svg'
+import {useSelector} from 'react-redux'
+import { selectCurrentMedia } from '../../store/media/media.selector';
+import { selectCurrentTheme } from '../../store/theme/theme.selector';
+import { selectCurrentUser } from '../../store/user/user.selecter';
 
 const UserDropDown = (props) => {
-    const { currentUser } = useContext(UserContext)
-    const { currentTheme } = useContext(ThemeContext)
-    const { currentMedia } = useContext(MediaContext)
+    const currentUser = useSelector(selectCurrentUser)
+	const currentTheme = useSelector(selectCurrentTheme)
+	const currentMedia = useSelector(selectCurrentMedia)
     const signOutClick = () => {
         signOutUser()
     }

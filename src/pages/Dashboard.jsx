@@ -1,8 +1,4 @@
-import React,{ PureComponent, useContext, useState, useEffect} from 'react';
-import {UserContext} from '../contexts/user.context'
-import {ThemeContext} from '../contexts/theme.context'
-import { MediaContext } from '../contexts/media.context';
-import Header from '../components/header/header'
+import React,{ useState, useEffect} from 'react';
 import {
 	MainContainer,
 	ContentContainer,
@@ -15,12 +11,16 @@ import {
 } from './Dashboard.styles'
 import Loading from '../icons/loading.gif'
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer} from 'recharts'
+import {useSelector} from 'react-redux'
+import { selectCurrentMedia } from '../store/media/media.selector';
+import { selectCurrentTheme } from '../store/theme/theme.selector';
+import { selectCurrentUser } from '../store/user/user.selecter';
 
 const Dashboard = () => {
 
-	const { currentUser } = useContext(UserContext)
-	const { currentTheme } = useContext(ThemeContext)
-	const { currentMedia } = useContext(MediaContext)
+	const currentUser = useSelector(selectCurrentUser)
+	const currentTheme = useSelector(selectCurrentTheme)
+	const currentMedia = useSelector(selectCurrentMedia)
 	const [ data, setData ] = useState([])
 	const [loading , setLoading ] = useState(false)
 

@@ -1,20 +1,19 @@
-import React, {Component, useContext, useEffect, useState} from 'react';
-import {BrowserRouter, Route, Link} from "react-router-dom"
-import {UserContext} from '../contexts/user.context'
+import React, {useEffect, useState} from 'react';
+import { Link} from "react-router-dom"
 import { 
 	MainContainer,
 	ContentContainer,
 	TableContainer,
 	ContentControlsContainer,
-	NewTaskDiv
  } from './Tasks.styles';
 
- import Header from '../components/header/header'
  import Loading from '../icons/loading.gif'
 
+ import {useSelector} from 'react-redux'
+import { selectCurrentUser } from '../store/user/user.selecter';
+
 const History = () => {		
-	const { currentUser } = useContext(UserContext)
-	//const { currentTheme } = useContext(ThemeContext)
+	const currentUser = useSelector(selectCurrentUser)
 	const [tasks, setTasks] = useState([])
 	const [ loading, setLoading ] = useState(false)
 
@@ -46,9 +45,6 @@ const History = () => {
 		})
         .then(()=>window.location.reload(false))
     }
-	// const handleDonorClick=(donorcode, event) => {
-	// 	this.props.loadDonorInfo(donorcode)
-	// 	}
 
 	return(
 		<MainContainer>
